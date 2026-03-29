@@ -1,0 +1,75 @@
+﻿@model EWebsite.ViewModel.ShippingVM
+
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Edit Address";
+}
+
+<h2 class="mt-3 mb-3">@ViewData["Title"]</h2>
+<partial name="_Notification" />
+
+<form asp-action="EditAddress"
+      method="post"
+      class="row g-3">
+
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-6">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="StreetAddress" class="form-label"></label>
+        <input asp-for="StreetAddress" class="form-control" />
+        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+        <label asp-for="City" class="form-label"></label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+        <label asp-for="State" class="form-label"></label>
+        <input asp-for="State" class="form-control" />
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+        <label asp-for="PostalCode" class="form-label"></label>
+        <input asp-for="PostalCode" class="form-control" />
+        <span asp-validation-for="PostalCode" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <div class="form-check">
+            <input asp-for="IsDefault" class="form-check-input" id="IsDefaultChk" />
+            <label asp-for="IsDefault" class="form-check-label">
+                Make this my default address
+            </label>
+        </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-between mt-3">
+        <a asp-area="Customer"
+           asp-controller="Checkout"
+           asp-action="Shipping"
+           class="btn btn-outline-secondary">
+            Back
+        </a>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

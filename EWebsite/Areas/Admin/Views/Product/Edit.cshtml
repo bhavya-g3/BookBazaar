@@ -1,0 +1,105 @@
+﻿@model ProductVM
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Product</h2>
+            <hr />
+        </div>
+
+        <div asp-validation-summary="All"></div>
+
+        <input type="hidden" asp-for="ProductBG.Id" />
+        <input type="hidden" asp-for="ProductBG.ImageURL" />
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.Title"></label>
+            <input asp-for="ProductBG.Title" class="form-control" />
+            <span asp-validation-for="ProductBG.Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.Description"></label>
+            <textarea asp-for="ProductBG.Description" class="form-control"></textarea>
+            <span asp-validation-for="ProductBG.Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.Author"></label>
+            <input asp-for="ProductBG.Author" class="form-control" />
+            <span asp-validation-for="ProductBG.Author" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.ISBN"></label>
+            <input asp-for="ProductBG.ISBN" class="form-control" />
+            <span asp-validation-for="ProductBG.ISBN" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.ListPrice"></label>
+            <input asp-for="ProductBG.ListPrice" class="form-control" />
+            <span asp-validation-for="ProductBG.ListPrice" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.Price"></label>
+            <input asp-for="ProductBG.Price" class="form-control" />
+            <span asp-validation-for="ProductBG.Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.Price50"></label>
+            <input asp-for="ProductBG.Price50" class="form-control" />
+            <span asp-validation-for="ProductBG.Price50" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.Price100"></label>
+            <input asp-for="ProductBG.Price100" class="form-control" />
+            <span asp-validation-for="ProductBG.Price100" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.MaxQuantityPerOrder"></label>
+            <input asp-for="ProductBG.MaxQuantityPerOrder" class="form-control" />
+            <span asp-validation-for="ProductBG.MaxQuantityPerOrder" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.ImageURL"></label>
+
+            @if (!string.IsNullOrEmpty(Model.ProductBG.ImageURL))
+            {
+                <div class="mb-2">
+                    <img src="@Model.ProductBG.ImageURL" alt="Current image" style="max-height:120px;" />
+                </div>
+            }
+
+            <input type="file" name="file" class="form-control" />
+            <small class="text-muted">Leave empty to keep the current image.</small>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductBG.CategoryID"></label>
+            <select asp-for="ProductBG.CategoryID" asp-items="@Model.CategoryList" class="form-select">
+                <option disabled selected>--Select Category--</option>
+            </select>
+            <span asp-validation-for="ProductBG.CategoryID" class="text-danger"></span>
+        </div>
+
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
+
+        <a asp-controller="Product" asp-action="ProdView"
+           class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+
+    </div>
+</form>
+
+@section Scripts {
+    <partial title="_ValidationScriptsPartial" />
+}

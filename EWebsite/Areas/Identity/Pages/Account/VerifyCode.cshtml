@@ -1,0 +1,35 @@
+﻿@page
+@model EWebsite.Areas.Identity.Pages.Account.VerifyCodeModel
+@{
+    ViewData["Title"] = "Verify Code";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <h2>@ViewData["Title"]</h2>
+        <p class="text-muted">
+            Open <strong>PasswordResetLog.txt</strong> on your Desktop,
+            find your entry, and enter the 6-digit code.
+        </p>
+
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Code" class="form-label"></label>
+                <input asp-for="Code" class="form-control" inputmode="numeric" maxlength="6" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Continue</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

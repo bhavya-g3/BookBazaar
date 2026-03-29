@@ -1,0 +1,69 @@
+﻿@model EWebsite.ViewModel.CreateUserVM
+@using EWebsite
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h2>Create User</h2>
+<partial name="_Notification" />
+
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <form asp-area="Admin"
+                  asp-controller="UserManagement"
+                  asp-action="Create"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                @* Optional: allow creating as Admin directly *@
+                <div class="form-check mb-3">
+                    <input asp-for="MakeAdmin" class="form-check-input" />
+                    <label asp-for="MakeAdmin" class="form-check-label">Make Admin</label>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+
+                    <a asp-area="Admin"
+                       asp-controller="UserManagement"
+                       asp-action="UserManage"
+                       class="btn btn-secondary ms-2">
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,16 @@
+﻿
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+@if (TempData["Error"] is string e && !string.IsNullOrWhiteSpace(e))
+{
+    <h2>@TempData["Error"]</h2>
+}
+@if (TempData["Warning"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["Warning"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

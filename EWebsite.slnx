@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EWebsite/EWebsite.csproj" />
+  <Project Path="WorkerService/WorkerService.csproj" Id="af13f70e-8289-453d-a71a-5f9b4f3ea3fc" />
+</Solution>

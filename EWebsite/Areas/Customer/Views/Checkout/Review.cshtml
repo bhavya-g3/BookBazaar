@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Order Review";
+
+    var shipping = ViewBag.Shipping;
+    var total = (double)(ViewBag.Total ?? 0d);
+}
+
+<partial name="_Notification" />
+
+<h2 class="mt-3 mb-3">Review Your Order</h2>
+
+@if (shipping == null)
+{
+    <div class="alert alert-warning">No shipping details found.</div>
+
+    <a asp-area="Customer"
+       asp-controller="Checkout"
+       asp-action="Shipping"
+       class="btn btn-primary">
+        Add Shipping
+    </a>
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-header">Shipping To</div>
+        <div class="card-body">
+            <div><strong>@shipping.Name</strong></div>
+            <div>@shipping.StreetAddress</div>
+            <div>@shipping.City, @shipping.State - @shipping.PostalCode</div>
+            <div>Phone: @shipping.Phone</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Payment (Coming Soon)</div>
+        <div class="card-body">
+            <p>Total: <strong>@total.ToString("c")</strong></p>
+
+            <button class="btn btn-success" disabled>
+                Place Order (Coming Soon)
+            </button>
+        </div>
+    </div>
+}

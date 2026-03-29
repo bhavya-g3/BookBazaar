@@ -1,0 +1,66 @@
+﻿@model EWebsite.Models.ShippingAddress
+
+@{
+    ViewData["Title"] = "Delete Address";
+}
+
+<h2 class="text-primary mt-3 mb-3">Delete Address</h2>
+<hr />
+
+<form asp-area="Customer"
+      asp-controller="Checkout"
+      asp-action="DeleteAddress"
+      asp-route-id="@Model.Id"
+      method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input class="form-control" value="@Model.Name" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input class="form-control" value="@Model.Phone" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Street Address</label>
+        <input class="form-control" value="@Model.StreetAddress" disabled />
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label class="form-label">City</label>
+            <input class="form-control" value="@Model.City" disabled />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="form-label">State</label>
+            <input class="form-control" value="@Model.State" disabled />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Postal Code</label>
+            <input class="form-control" value="@Model.PostalCode" disabled />
+        </div>
+    </div>
+
+    <div class="d-flex gap-2 mt-3">
+        <button type="submit"
+                class="btn btn-danger"
+                style="width:150px;">
+            Delete
+        </button>
+
+        <a asp-area="Customer"
+           asp-controller="Checkout"
+           asp-action="Shipping"
+           class="btn btn-outline-secondary">
+            Cancel
+        </a>
+    </div>
+</form>

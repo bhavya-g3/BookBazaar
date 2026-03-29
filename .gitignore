@@ -1,0 +1,79 @@
+# =========================
+# BUILD OUTPUT (ALL PROJECTS)
+# =========================
+**/bin/
+**/obj/
+
+# =========================
+# VISUAL STUDIO
+# =========================
+.vs/
+*.user
+*.suo
+*.rsuser
+
+# Solution user file
+*.slnLaunch.user
+
+# =========================
+# LOGS (ROOT + PROJECTS)
+# =========================
+Logs/
+logs/
+**/logs/
+*.log
+
+# =========================
+# ENVIRONMENT / SECRETS
+# =========================
+**/appsettings.Development.json
+**/appsettings.*.Local.json
+.env
+secrets.json
+
+# =========================
+# OPTIONAL (LOCAL CONFIG)
+# =========================
+**/Properties/launchSettings.json
+
+# =========================
+# PACKAGE FILES
+# =========================
+*.nupkg
+*.snupkg
+
+# =========================
+# TEST / COVERAGE
+# =========================
+TestResults/
+coverage/
+
+# =========================
+# IDEs
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# API TEST FILES
+# =========================
+*.http
+
+# =========================
+# SCAFFOLDING TEMP FILES
+# =========================
+ScaffoldingReadMe.txt
+
+
+# =========================
+# ENTITY FRAMEWORK MIGRATIONS (EXCLUDED BY CHOICE)
+# =========================
+**/Migrations/
+
+**/appsettings.json

@@ -1,0 +1,169 @@
+﻿@model EWebsite.ViewModel.ShippingVM
+
+@{
+    ViewData["Title"] = "Shipping Details";
+}
+
+<h2 class="mt-3 mb-3">Shipping Details</h2>
+<partial name="_Notification" />
+
+<form asp-action="Shipping" method="post" class="row g-3">
+    @Html.AntiForgeryToken()
+
+    <!-- Saved addresses dropdown -->
+    <div class="col-12">
+        <label class="form-label" for="SelectedAddressId">Saved addresses</label>
+
+        <select asp-for="SelectedAddressId"
+                asp-items="Model.AddressOptions"
+                class="form-select"
+                id="SelectedAddressId"></select>
+
+        <span class="form-text">Choose a saved address or select “Add new address”.</span>
+    </div>
+
+    <!-- Manage existing address buttons (Edit/Delete) -->
+    <div id="manageAddressButtons"
+         class="col-12 d-flex gap-2 mt-2 d-none">
+
+        <a id="editAddressBtn"
+           class="btn btn-warning btn-sm">Edit</a>
+
+        <!-- Navigate to Delete confirmation page -->
+        <button type="submit"
+                class="btn btn-danger mx-2"
+                formmethod="get"
+                formaction="@Url.Action("DeleteAddress", "Checkout", new { area = "Customer" })">
+            Delete
+        </button>
+    </div>
+
+    <!-- Default checkbox (only for Add new) -->
+    <div class="col-12 d-none" id="defaultCheckboxWrapper">
+        <div class="form-check">
+            <input asp-for="IsDefault" class="form-check-input" id="IsDefaultChk" />
+            <label asp-for="IsDefault" class="form-check-label">
+                Make this my default address
+            </label>
+        </div>
+    </div>
+
+    <!-- Address fields (only when adding new) -->
+    <div id="addressFields" class="col-12 d-none">
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Phone" class="form-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="StreetAddress" class="form-label"></label>
+                <input asp-for="StreetAddress" class="form-control" />
+                <span asp-validation-for="StreetAddress" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="City" class="form-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="State" class="form-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="PostalCode" class="form-label"></label>
+                <input asp-for="PostalCode" class="form-control" />
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-12 d-flex justify-content-between mt-3">
+
+        <a asp-area="Customer"
+           asp-controller="Cart"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            Back to Cart
+        </a>
+
+        <button type="submit" class="btn btn-primary">
+            Save &amp; Continue
+        </button>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+            const selectEl = document.getElementById('SelectedAddressId');
+            const fields = document.getElementById('addressFields');
+            const chkWrapper = document.getElementById('defaultCheckboxWrapper');
+            const isDefaultChk = document.getElementById('IsDefaultChk');
+
+            const manageButtons = document.getElementById('manageAddressButtons');
+            const editBtn = document.getElementById('editAddressBtn');
+
+            function setInputsEnabled(enabled) {
+                fields.querySelectorAll('input, select, textarea').forEach(function (el) {
+                    el.disabled = !enabled;
+                });
+            }
+
+            function clearAddressInputs() {
+                const inputs = fields.querySelectorAll('input');
+                inputs.forEach(function (el) {
+                    el.value = '';
+                });
+            }
+
+            function toggleFields() {
+                const addNew = (selectEl.value === "-1");
+
+                if (addNew) {
+                    fields.classList.remove('d-none');
+                    chkWrapper.classList.remove('d-none');
+
+                    clearAddressInputs();
+                    isDefaultChk.checked = false;
+                }
+                else {
+                    fields.classList.add('d-none');
+                    chkWrapper.classList.add('d-none');
+                }
+
+                if (!addNew) {
+                    manageButtons.classList.remove('d-none');
+                    editBtn.href = `/Customer/Checkout/EditAddress/${selectEl.value}`;
+                }
+                else {
+                    manageButtons.classList.add('d-none');
+                }
+
+                setInputsEnabled(addNew);
+            }
+
+            document.addEventListener('DOMContentLoaded', toggleFields);
+            selectEl.addEventListener('change', toggleFields);
+            toggleFields();
+        })();
+    </script>
+}
